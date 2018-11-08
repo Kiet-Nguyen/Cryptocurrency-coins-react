@@ -296,6 +296,7 @@ const icons = {
   sbd: require('./sbd.svg'),
   sberbank: require('./sberbank.svg'),
   sc: require('./sc.svg'),
+  search: require('./search.svg'),
   shift: require('./shift.svg'),
   sib: require('./sib.svg'),
   sky: require('./sky.svg'),
@@ -391,7 +392,7 @@ const icons = {
   zen: require('./zen.svg'),
   zil: require('./zil.svg'),
   zilla: require('./zilla.svg'),
-  zrx: require('./zrx.svg'),
+  zrx: require('./zrx.svg') 
 };
 
 export default icons;

@@ -1,0 +1,18 @@
+.bgBlue {
+  background-color: var(--blue-dark);
+}
+
+.inputCustom {
+  border-radius: 20px;
+  width: 100%;
+}
+
+.buttonPosition {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: var(--gray);
+  min-width: 3rem;
+}

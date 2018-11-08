@@ -5,3 +5,12 @@
   padding: 2rem 2.5rem;
   text-align: center;
 }
+
+.textBlue {
+  color: var(--blue);
+}
+
+.textHighlight {
+  font-weight: 700;
+  font-size: 0.9rem;
+}

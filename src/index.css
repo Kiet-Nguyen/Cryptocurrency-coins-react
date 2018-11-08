@@ -2,6 +2,9 @@
 
 :root {
   --blue: #55b3e9;
+  --blue-dark: #3d89cd;
+  --red: #d94040;
+  --gray: #bbbaba;
 }
 
 html {
@@ -20,4 +23,18 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+/* Bootstraps */
+.form-block {
+  min-width: 17rem;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn.focus,
+.btn:focus {
+  box-shadow: none;
 }

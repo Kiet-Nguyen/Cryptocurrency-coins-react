@@ -5,10 +5,10 @@ import classes from './Coin.module.css';
 import icons from '../../assets/icons';
 
 const formatPriceUSD = (num) => {
-  let numSplit = [];
-  let intPart = null;
-  let decimalPart = null;
-  let result = '';
+  let numSplit;
+  let intPart;
+  let decimalPart;
+  let result;
 
   num = Math.abs(num);
   num = num.toFixed(2);
@@ -29,14 +29,8 @@ const formatPriceUSD = (num) => {
   return result;
 };
 
-const formatPriceBTC = (num) => {
-  const number = parseFloat(num);
-  const formatedNum = number.toFixed(4);
-  return formatedNum;
-};
-
 const Coin = ({
-  nameCoins, symbolCoins, rankCoins, priceUSDCoins, priceBTCCoins, markerCapCoins 
+  nameCoins, symbolCoins, rankCoins, priceUSDCoins, change24HCoins, markerCapCoins, volumn24HCoins 
 }) => {
   return (
     <div className="col-3">
@@ -57,22 +51,29 @@ const Coin = ({
         </h3>
 
         <ul className="list-unstyled">
-          <li className="mb-1">
-            {`Price: ${formatPriceUSD(priceUSDCoins)}`}
-          </li>
-          <li className="mb-1">
-            Price BTC:
-            {formatPriceBTC(priceBTCCoins)}
-          </li>
-          <li className="mb-1">
-            Market cap:
-            <br />
+          <li className="mb-2">
+            <p className={`${classes.textHighlight} mb-0`}>Market cap: </p>
             {formatPriceUSD(markerCapCoins)}
+          </li>
+          <li className="mb-2">
+            <p className={`${classes.textHighlight} mb-0`}>Price: </p>
+            <span className={classes.textBlue}>{formatPriceUSD(priceUSDCoins)}</span>
+          </li>
+          <li className="mb-2">
+            <p className={`${classes.textHighlight} mb-0`}>Volumn (24h): </p>
+            <span>{formatPriceUSD(volumn24HCoins)}</span>
+          </li>
+          <li className="mb-2">
+            <p className={`${classes.textHighlight} mb-0`}>Change (24h): </p>
+            <span style={(change24HCoins > 0) ? { color: '#55b3e9' } : { color: '#d94040' }}>
+              {change24HCoins}
+              %
+            </span>
           </li>
         </ul>
       </div>
     </div>
   );
-}
+};
 
 export default Coin;

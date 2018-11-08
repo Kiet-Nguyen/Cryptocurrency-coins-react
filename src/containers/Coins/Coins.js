@@ -1,51 +1,38 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { arrayOf, object } from 'prop-types';
 
 import Coin from '../../components/Coin/Coin';
 
-class Coins extends Component {
-  state = {
-    coins: [],
+const Coins = ({ coinsDataApp }) => {
+  let coinsData = <p>Something went wrong</p>;
+  if (coinsDataApp !== null) {
+    coinsData = coinsDataApp.map(coin => (
+      <Coin
+        key={coin.name}
+        nameCoins={coin.name}
+        symbolCoins={coin.symbol}
+        rankCoins={coin.rank}
+        priceUSDCoins={coin.price_usd}
+        volumn24HCoins={coin['24h_volume_usd']}
+        change24HCoins={coin.percent_change_24h}
+        markerCapCoins={coin.market_cap_usd}
+      />
+    ));
   }
 
-  componentDidMount = async () => {
-    try {
-      const results = await axios.get('/ticker/?limit=2000');
-      const numOfCoins = results.data.slice(0, 99);
-      this.setState({ coins: numOfCoins });
-    } catch (error) {
-      console.log('error', error);
-    }
-  }
-
-  render() {
-    const { coins } = this.state;
-
-    let coinsData = <p>Something went wrong</p>;
-    if (coins !== null) {
-      coinsData = coins.map(coin => (
-        <Coin
-          key={coin.name}
-          nameCoins={coin.name}
-          symbolCoins={coin.symbol}
-          rankCoins={coin.rank}
-          priceUSDCoins={coin.price_usd}
-          priceBTCCoins={coin.price_btc}
-          markerCapCoins={coin.market_cap_usd}
-        />
-      ));
-    }
-
-    return (
-      <div className="container">
-        <div className="my-5">
-          <div className="row">
-            {coinsData}
-          </div>
+  return (
+    <div className="container">
+      <div className="my-5">
+        <div className="row">
+          {coinsData}
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+Coins.propTypes = {
+  coinsDataApp: arrayOf(object).isRequired,
+};
 
 export default Coins;
