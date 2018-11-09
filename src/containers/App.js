@@ -2,9 +2,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import './App.module.css';
+import classes from './App.module.css';
 import Header from '../components/Header/Header';
 import Coins from './Coins/Coins';
+import Spinner from '../components/UI/Spinner/Spinner';
 
 class App extends Component {
   state = {
@@ -12,6 +13,10 @@ class App extends Component {
     searchInput: '',
     searchCoins: [],
     changeTimeout: null,
+    startValue: 0,
+    error: false,
+    hasMore: true,
+    isLoading: false,
   }
 
   changeSearchInputHandler = (event) => {
@@ -47,21 +52,93 @@ class App extends Component {
     }
   }
 
-  componentDidMount = async () => {
-    try {
-      const results = await axios.get('/ticker/?limit=2000');
-      const numOfCoins = results.data.slice(0, 99);
-      this.setState({ coins: numOfCoins });
-      this.setState({ searchCoins: numOfCoins });
-    } catch (error) {
-      console.log('error', error);
+  apiResultToArray = (result) => {
+    const transformedData = Object.keys(result.data.data)
+      .map(key => [...Array(result.data.data[key])]
+        .map(coin => coin))
+      .reduce((arr, el) => arr.concat(el), []);
+    return transformedData;
+  }
+
+  handleScroll = () => {
+    const {
+      loadCoinCards,
+      state: {
+        error,
+        isLoading,
+        hasMore,
+      },
+    } = this;
+
+    if (error || isLoading || !hasMore) return;
+
+    // Checks that the page has scrolled to the bottom
+    if (
+      window.innerHeight + document.documentElement.scrollTop
+      === document.documentElement.offsetHeight
+    ) {
+      loadCoinCards();
     }
   }
 
+  loadCoinCards = () => {
+    const {
+      state: {
+        startValue,
+        coins,
+        searchCoins,
+      },
+    } = this;
+
+    this.setState({ isLoading: true }, async () => {
+      try {
+        const results = await axios.get(`?start=${startValue}&limit=12`);
+        const resultsArray = this.apiResultToArray(results);
+        this.setState({
+          startValue: startValue + 13,
+          hasMore: coins.length < 2093,
+          isLoading: false,
+          coins: [
+            ...coins,
+            ...resultsArray,
+          ],
+          searchCoins: [
+            ...searchCoins,
+            ...resultsArray,
+          ],
+        });
+      } catch (error) {
+        this.setState({
+          error: error.message,
+          isLoading: false,
+        });
+      }
+    });
+  }
+
+  componentWillMount = () => {
+    this.loadCoinCards();
+  }
+
+  componentDidMount = () => {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  componentWillUnmount = () => {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
   render() {
-    const { searchInput, searchCoins } = this.state;
+    const {
+      searchInput,
+      searchCoins,
+      error,
+      hasMore,
+      isLoading,
+    } = this.state;
+
     return (
-      <React.Fragment>
+      <div className={classes.bgLightGray}>
         <Header
           searchInputApp={searchInput}
           changeSearchValueApp={this.changeSearchInputHandler}
@@ -70,7 +147,23 @@ class App extends Component {
         <Coins
           coinsDataApp={searchCoins}
         />
-      </React.Fragment>
+
+        <div className="container text-center">
+          {error && (
+            <div style={{ color: '#900' }}>
+              {error}
+            </div>
+          )}
+
+          {isLoading && (
+            <Spinner />
+          )}
+
+          {!hasMore && (
+            <div>You reached the end!</div>
+          )}
+        </div>
+      </div>
     );
   }
 }

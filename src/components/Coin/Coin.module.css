@@ -12,7 +12,7 @@
 }
 
 .more:checked~.front {
-  transform: rotateY(180deg);
+  transform: rotateY(-180deg);
 }
 
 .more:checked~.back {
@@ -27,15 +27,15 @@
   padding: 2rem 2.5rem;
   text-align: center;
   transform-style: preserve-3d;
-  transition: transform 1s cubic-bezier(0.75, 0, 0.85, 1);
+  transition: transform 0.8s cubic-bezier(0.75, 0, 0.85, 1);
   position: absolute;
   top: 0;
   left: 0;
   backface-visibility: hidden;
+  background-color: #fff;
 }
 
 .back {
-  background-color: orangered;
   transform: rotateY(180deg);
 }
 

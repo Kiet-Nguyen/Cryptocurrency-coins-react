@@ -6,3 +6,8 @@
 .heading3 {
   font-size: 0.8rem;
 }
+
+.bgLightGray {
+  background-color: var(--light-gray);
+  min-height: 100vh;
+}

@@ -5,7 +5,7 @@ import classes from './Header.module.css';
 import icons from '../../assets/icons';
 
 const Header = ({ searchInputApp, changeSearchValueApp }) => (
-  <nav className={`navbar navbar-expand-lg navbar-light py-3 ${classes.bgBlue}`}>
+  <nav className={`navbar navbar-expand-lg navbar-light py-3 fixed-top ${classes.bgBlue}`}>
     <div className="container">
       <a className="navbar-brand text-white" href="/">Cryptocurrencies</a>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { arrayOf, object } from 'prop-types';
+import { objectOf, oneOfType, object, array } from 'prop-types';
 
 import Coin from '../../components/Coin/Coin';
 
@@ -9,20 +9,26 @@ const Coins = ({ coinsDataApp }) => {
     coinsData = coinsDataApp.map(coin => (
       <Coin
         key={coin.name}
+        idCoins={coin.id}
         nameCoins={coin.name}
         symbolCoins={coin.symbol}
         rankCoins={coin.rank}
-        priceUSDCoins={coin.price_usd}
-        volumn24HCoins={coin['24h_volume_usd']}
-        change24HCoins={coin.percent_change_24h}
-        markerCapCoins={coin.market_cap_usd}
+        priceUSDCoins={coin.quotes.USD.price}
+        volumn24HCoins={coin.quotes.USD.volume_24h}
+        change24HCoins={coin.quotes.USD.percent_change_24h}
+        markerCapCoins={coin.quotes.USD.market_cap}
+        change1HCoins={coin.quotes.USD.percent_change_1h}
+        change7DaysCoins={coin.quotes.USD.percent_change_7d}
+        cirSupply={coin.circulating_supply}
+        totalSupply={coin.total_supply}
+        maxSupply={coin.max_supply}
       />
     ));
   }
 
   return (
     <div className="container">
-      <div className="my-5">
+      <div className="my-5 pt-6">
         <div className="row">
           {coinsData}
         </div>
@@ -32,7 +38,7 @@ const Coins = ({ coinsDataApp }) => {
 };
 
 Coins.propTypes = {
-  coinsDataApp: arrayOf(object).isRequired,
+  coinsDataApp: objectOf(oneOfType([object, array])).isRequired,
 };
 
 export default Coins;

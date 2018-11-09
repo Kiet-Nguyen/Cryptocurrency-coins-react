@@ -6,7 +6,7 @@ import './index.css';
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 
-axios.defaults.baseURL = 'https://api.coinmarketcap.com/v1';
+axios.defaults.baseURL = 'https://api.coinmarketcap.com/v2/ticker/';
 
 axios.interceptors.request.use((request) => {
   console.log(request);

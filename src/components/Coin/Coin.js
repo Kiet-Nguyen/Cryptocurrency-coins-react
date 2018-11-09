@@ -25,15 +25,15 @@ const formatPriceUSD = (num) => {
   }
   decimalPart = numSplit[1];
 
-  result = `$${intPart}.${decimalPart}`;
+  result = `${intPart}.${decimalPart}`;
   return result;
 };
 
 const Coin = ({
-  nameCoins, symbolCoins, rankCoins, priceUSDCoins, change24HCoins, markerCapCoins, volumn24HCoins 
+  idCoins, nameCoins, symbolCoins, rankCoins, priceUSDCoins, change24HCoins, markerCapCoins, volumn24HCoins, change1HCoins, change7DaysCoins, cirSupply, totalSupply, maxSupply 
 }) => {
   return (
-    <div className="col-3">
+    <div className="col-sm-6 col-md-4">
       <div className={classes.card}>
         <input type="checkbox" id={nameCoins} className={classes.more} aria-hidden="true" />
         <div className={[classes.coinCard, classes.front].join(' ')}>
@@ -41,7 +41,7 @@ const Coin = ({
             <img
               src={icons[symbolCoins.toLowerCase()]
                 ? icons[symbolCoins.toLowerCase()]
-                : icons.dai
+                : `https://s2.coinmarketcap.com/static/img/coins/16x16/${idCoins}.png`
               }
               alt={symbolCoins}
             />
@@ -57,16 +57,8 @@ const Coin = ({
 
           <ul className="list-unstyled">
             <li className="mb-2">
-              <p className={`${classes.textHighlight} mb-0`}>Market cap: </p>
-              {formatPriceUSD(markerCapCoins)}
-            </li>
-            <li className="mb-2">
               <p className={`${classes.textHighlight} mb-0`}>Price: </p>
-              <span className={classes.textBlue}>{formatPriceUSD(priceUSDCoins)}</span>
-            </li>
-            <li className="mb-2">
-              <p className={`${classes.textHighlight} mb-0`}>Volumn (24h): </p>
-              <span>{formatPriceUSD(volumn24HCoins)}</span>
+              <span className={classes.textBlue}>${formatPriceUSD(priceUSDCoins)}</span>
             </li>
             <li className="mb-2">
               <p className={`${classes.textHighlight} mb-0`}>Change (24h): </p>
@@ -75,16 +67,59 @@ const Coin = ({
                 %
               </span>
             </li>
+            <li className="mb-2">
+              <p className={`${classes.textHighlight} mb-0`}>Volumn (24h): </p>
+              <span>${formatPriceUSD(volumn24HCoins)}</span>
+            </li>
+            <li className="mb-2">
+              <p className={`${classes.textHighlight} mb-0`}>Market cap: </p>
+              <span>${formatPriceUSD(markerCapCoins)}</span>
+            </li>
           </ul>
 
-          <label htmlFor={nameCoins} aria-hidden="true" className={`btn mt-3 ${classes.flipButton}`}>
-              Line Chart
+          <label
+            htmlFor={nameCoins}
+            aria-hidden="true"
+            className={`btn mt-3 ${classes.flipButton}`}
+          >
+            More details
           </label>
         </div>
 
         <div className={[classes.coinCard, classes.back].join(' ')}>
-          <h2>Back</h2>
-          <label htmlFor={nameCoins} aria-hidden="true" className={`btn mt-3 ${classes.flipButton}`}>
+          <ul className="list-unstyled">
+            <li className="mb-2">
+              <p className={`${classes.textHighlight} mb-0`}>Change (1h): </p>
+              <span style={(change1HCoins > 0) ? { color: '#55b3e9' } : { color: '#d94040' }}>
+                {change1HCoins}
+                %
+              </span>
+            </li>
+            <li className="mb-2">
+              <p className={`${classes.textHighlight} mb-0`}>Change (1h): </p>
+              <span style={(change7DaysCoins > 0) ? { color: '#55b3e9' } : { color: '#d94040' }}>
+                {change7DaysCoins}
+                %
+              </span>
+            </li>
+            <li className="mb-2">
+              <p className={`${classes.textHighlight} mb-0`}>Circularlating supply: </p>
+              {formatPriceUSD(cirSupply)}
+            </li>
+            <li className="mb-2">
+              <p className={`${classes.textHighlight} mb-0`}>Total supply: </p>
+              {formatPriceUSD(totalSupply)}
+            </li>
+            <li className="mb-2">
+              <p className={`${classes.textHighlight} mb-0`}>Max supply: </p>
+              {formatPriceUSD(maxSupply)}
+            </li>
+          </ul>
+          <label
+            htmlFor={nameCoins}
+            aria-hidden="true"
+            className={`btn mt-3 ${classes.flipButton}`}
+          >
             Return
           </label>
         </div>
