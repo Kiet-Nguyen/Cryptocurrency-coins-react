@@ -18,14 +18,14 @@ const Header = ({ searchInputApp, changeSearchValueApp }) => (
             <input
               className={`${classes.inputCustom} form-control mr-sm-2 position-relative`}
               type="search"
-              placeholder="Search"
+              placeholder="Search name"
               aria-label="Search"
               value={searchInputApp}
               onChange={changeSearchValueApp}
             />
-            <button className={`btn my-2 my-sm-0 ${classes.buttonPosition}`} type="submit">
+            <span className={`my-2 my-sm-0 ${classes.buttonPosition}`}>
               <img src={icons.search} alt="Search" />
-            </button>
+            </span>
           </form>
         </div>
       </div>

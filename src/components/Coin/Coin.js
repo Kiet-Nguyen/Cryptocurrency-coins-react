@@ -34,43 +34,60 @@ const Coin = ({
 }) => {
   return (
     <div className="col-3">
-      <div className={classes.coinCard}>
-        <div className="mb-2">
-          <img
-            src={icons[symbolCoins.toLowerCase()] ? icons[symbolCoins.toLowerCase()] : icons.dai}
-            alt={symbolCoins}
-          />
+      <div className={classes.card}>
+        <input type="checkbox" id={nameCoins} className={classes.more} aria-hidden="true" />
+        <div className={[classes.coinCard, classes.front].join(' ')}>
+          <div className="mb-2">
+            <img
+              src={icons[symbolCoins.toLowerCase()]
+                ? icons[symbolCoins.toLowerCase()]
+                : icons.dai
+              }
+              alt={symbolCoins}
+            />
+          </div>
+
+          <h2 className={`${globalClasses.heading2} mb-4`}>
+            {`${nameCoins} (${symbolCoins})`}
+          </h2>
+
+          <h3 className={`${globalClasses.heading3} mb-4`}>
+            {`Rank: ${rankCoins}`}
+          </h3>
+
+          <ul className="list-unstyled">
+            <li className="mb-2">
+              <p className={`${classes.textHighlight} mb-0`}>Market cap: </p>
+              {formatPriceUSD(markerCapCoins)}
+            </li>
+            <li className="mb-2">
+              <p className={`${classes.textHighlight} mb-0`}>Price: </p>
+              <span className={classes.textBlue}>{formatPriceUSD(priceUSDCoins)}</span>
+            </li>
+            <li className="mb-2">
+              <p className={`${classes.textHighlight} mb-0`}>Volumn (24h): </p>
+              <span>{formatPriceUSD(volumn24HCoins)}</span>
+            </li>
+            <li className="mb-2">
+              <p className={`${classes.textHighlight} mb-0`}>Change (24h): </p>
+              <span style={(change24HCoins > 0) ? { color: '#55b3e9' } : { color: '#d94040' }}>
+                {change24HCoins}
+                %
+              </span>
+            </li>
+          </ul>
+
+          <label htmlFor={nameCoins} aria-hidden="true" className={`btn mt-3 ${classes.flipButton}`}>
+              Line Chart
+          </label>
         </div>
 
-        <h2 className={`${globalClasses.heading2} mb-4`}>
-          {`${nameCoins} (${symbolCoins})`}
-        </h2>
-
-        <h3 className={`${globalClasses.heading3} mb-4`}>
-          {`Rank: ${rankCoins}`}
-        </h3>
-
-        <ul className="list-unstyled">
-          <li className="mb-2">
-            <p className={`${classes.textHighlight} mb-0`}>Market cap: </p>
-            {formatPriceUSD(markerCapCoins)}
-          </li>
-          <li className="mb-2">
-            <p className={`${classes.textHighlight} mb-0`}>Price: </p>
-            <span className={classes.textBlue}>{formatPriceUSD(priceUSDCoins)}</span>
-          </li>
-          <li className="mb-2">
-            <p className={`${classes.textHighlight} mb-0`}>Volumn (24h): </p>
-            <span>{formatPriceUSD(volumn24HCoins)}</span>
-          </li>
-          <li className="mb-2">
-            <p className={`${classes.textHighlight} mb-0`}>Change (24h): </p>
-            <span style={(change24HCoins > 0) ? { color: '#55b3e9' } : { color: '#d94040' }}>
-              {change24HCoins}
-              %
-            </span>
-          </li>
-        </ul>
+        <div className={[classes.coinCard, classes.back].join(' ')}>
+          <h2>Back</h2>
+          <label htmlFor={nameCoins} aria-hidden="true" className={`btn mt-3 ${classes.flipButton}`}>
+            Return
+          </label>
+        </div>
       </div>
     </div>
   );

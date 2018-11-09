@@ -13,6 +13,7 @@
   right: 0;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
-  background-color: var(--gray);
+  background-color: transparent;
   min-width: 3rem;
+  padding: .375rem .75rem
 }

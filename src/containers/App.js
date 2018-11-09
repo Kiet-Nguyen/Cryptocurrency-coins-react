@@ -34,6 +34,7 @@ class App extends Component {
       this.state.coins.map((coin) => {
         const coinName = coin.name.toUpperCase();
         const partOfCoinName = coinName.includes(inputValue);
+
         if (partOfCoinName) {
           filteredData.push(coin);
         }

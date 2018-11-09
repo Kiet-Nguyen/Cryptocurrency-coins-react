@@ -1,9 +1,42 @@
+.card {
+  /* 3D position */
+  position: relative;
+  min-height: 32rem;
+  width: 100%;
+  perspective: 150rem;
+  -moz-perspective: 150rem;
+}
+
+.more {
+  display: none;
+}
+
+.more:checked~.front {
+  transform: rotateY(180deg);
+}
+
+.more:checked~.back {
+  transform: rotateY(0);
+}
+
 .coinCard {
-  /* min-height: 22rem; */
+  min-height: 29rem;
+  width: 100%;
   box-shadow: 1px 1px 5px 1px rgba(221, 221, 221, 1);
   margin-bottom: 2rem;
   padding: 2rem 2.5rem;
   text-align: center;
+  transform-style: preserve-3d;
+  transition: transform 1s cubic-bezier(0.75, 0, 0.85, 1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+}
+
+.back {
+  background-color: orangered;
+  transform: rotateY(180deg);
 }
 
 .textBlue {
@@ -13,4 +46,17 @@
 .textHighlight {
   font-weight: 700;
   font-size: 0.9rem;
+}
+
+.flipButton{
+  border-radius: 20px;
+  border: 1px solid var(--blue);
+  padding: 0.3rem 1.2rem;
+  transition: all 0.2s;
+  backface-visibility: hidden;
+}
+
+.flipButton:hover {
+  background-color: var(--blue);
+  color: #fff;
 }
