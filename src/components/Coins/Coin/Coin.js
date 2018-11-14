@@ -1,15 +1,21 @@
 import React from 'react';
+import {
+  objectOf,
+  oneOfType,
+  string,
+  number,
+} from 'prop-types';
 
 import globalClasses from '../../../containers/App.module.css';
 import classes from './Coin.module.css';
 import icons from '../../../assets/icons';
 
 const formatPriceUSD = (num) => {
-  let number = num;
-  number = Math.abs(number);
-  number = number.toFixed(2);
+  let price = num;
+  price = Math.abs(price);
+  price = price.toFixed(2);
 
-  const numSplit = number.split('.');
+  const numSplit = price.split('.');
   let intPart = numSplit[0];
   const decimalPart = numSplit[1];
   // Add ',' to seperate thousand
@@ -116,5 +122,12 @@ const Coin = ({ coin }) => (
     </div>
   </div>
 );
+
+Coin.propTypes = {
+  coin: objectOf(oneOfType(
+    string,
+    number,
+  )).isRequired,
+};
 
 export default Coin;

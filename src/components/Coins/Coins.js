@@ -1,9 +1,7 @@
 import React from 'react';
 import {
-  objectOf,
-  oneOfType,
   object,
-  array,
+  arrayOf,
 } from 'prop-types';
 
 import Coin from './Coin/Coin';
@@ -29,7 +27,7 @@ const Coins = ({ coinsDataApp }) => {
 };
 
 Coins.propTypes = {
-  coinsDataApp: objectOf(oneOfType([object, array])).isRequired,
+  coinsDataApp: arrayOf(object).isRequired,
 };
 
 export default Coins;

@@ -3,7 +3,12 @@ import { string, func, bool } from 'prop-types';
 
 import classes from './Button.module.css';
 
-const Button = ({ children, clickedSortApp, desOrAsceApp, sortValueNameApp }) => (
+const Button = ({
+  children,
+  clickedSortApp,
+  desOrAsceApp,
+  sortValueNameApp,
+}) => (
   <button
     type="button"
     className={classes.sortButton}
