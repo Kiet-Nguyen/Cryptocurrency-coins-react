@@ -1,0 +1,22 @@
+.sortButton {
+  border: 1px solid var(--blue);
+  border-radius: 20px;
+  margin-top: 4rem;
+  padding: 7px 15px;
+  background-color: #ffffff;
+  color: var(--blue);
+  cursor: pointer;
+}
+
+.sortButton:not(:last-child) {
+  margin-right: 1.2rem;
+}
+
+.sortButton:hover {
+  background-color: var(--blue);
+  color: #fff;
+}
+
+.sortButton:focus {
+  outline: none;
+}

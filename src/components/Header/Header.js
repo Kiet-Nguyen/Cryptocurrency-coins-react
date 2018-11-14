@@ -5,9 +5,11 @@ import classes from './Header.module.css';
 import icons from '../../assets/icons';
 
 const Header = ({ searchInputApp, changeSearchValueApp }) => (
-  <nav className={`navbar navbar-expand-lg navbar-light py-3 fixed-top ${classes.bgBlue}`}>
+  <nav className={`navbar navbar-expand-lg navbar-light py-3 ${classes.bgBlue}`}>
     <div className="container">
-      <a className="navbar-brand text-white" href="/">Cryptocurrencies</a>
+      <a className="navbar-brand text-white" href="/">
+        <h1 className="h4">Cryptocurrencies</h1>
+      </a>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon" />
       </button>

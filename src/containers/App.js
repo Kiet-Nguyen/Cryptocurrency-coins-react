@@ -4,8 +4,9 @@ import axios from 'axios';
 
 import classes from './App.module.css';
 import Header from '../components/Header/Header';
-import Coins from './Coins/Coins';
+import Coins from '../components/Coins/Coins';
 import Spinner from '../components/UI/Spinner/Spinner';
+import Button from '../components/UI/Button/Button';
 
 class App extends Component {
   state = {
@@ -17,6 +18,7 @@ class App extends Component {
     error: false,
     hasMore: true,
     isLoading: false,
+    descending: true,
   }
 
   changeSearchInputHandler = (event) => {
@@ -25,6 +27,7 @@ class App extends Component {
     if (this.state.changeTimeout) {
       clearTimeout(this.state.changeTimeout);
     }
+
     const timeout = setTimeout(this.searchCoins, 500);
     this.setState({
       changeTimeout: timeout,
@@ -116,6 +119,50 @@ class App extends Component {
     });
   }
 
+  sortCoinCard = (des, type) => {
+    const {
+      state: {
+        searchCoins,
+        descending,
+      },
+    } = this;
+    // Check sort mode: descending or ascending
+    const mod = des ? 1 : -1;
+
+    const sortCoinCards = [...searchCoins];
+    let valueA;
+    let valueB;
+
+    sortCoinCards.sort((a, b) => {
+      if (type === 'price') {
+        valueA = a.quotes.USD[type];
+        valueB = b.quotes.USD[type];
+      } else {
+        valueA = a[type];
+        valueB = b[type];
+      }
+      // Switch mode
+      if (valueA < valueB) {
+        return 1 * mod;
+      } if (valueA > valueB) {
+        return -1 * mod;
+      }
+      return 0;
+    });
+
+    if (descending) {
+      this.setState({ descending: false });
+    } else {
+      this.setState({ descending: true });
+    }
+    this.setState({ searchCoins: sortCoinCards });
+  }
+
+  getSortTypeDataFromChild = (dataFromChild) => {
+    const sortTypeArr = dataFromChild;
+    return sortTypeArr;
+  }
+
   componentWillMount = () => {
     this.loadCoinCards();
   }
@@ -135,7 +182,10 @@ class App extends Component {
       error,
       hasMore,
       isLoading,
+      descending,
     } = this.state;
+
+    const sortValueArr = ['name', 'rank', 'price'];
 
     return (
       <div className={classes.bgLightGray}>
@@ -144,24 +194,46 @@ class App extends Component {
           changeSearchValueApp={this.changeSearchInputHandler}
         />
 
-        <Coins
-          coinsDataApp={searchCoins}
-        />
+        <div className="container">
+          <Button
+            clickedSortApp={this.sortCoinCard}
+            desOrAsceApp={descending}
+            sortValueNameApp={sortValueArr[0]}
+          >
+            Sort name
+          </Button>
+          <Button
+            clickedSortApp={this.sortCoinCard}
+            desOrAsceApp={descending}
+            sortValueNameApp={sortValueArr[1]}
+          >
+            Sort rank
+          </Button>
+          <Button
+            clickedSortApp={this.sortCoinCard}
+            desOrAsceApp={descending}
+            sortValueNameApp={sortValueArr[2]}
+          >
+            Sort price
+          </Button>
 
-        <div className="container text-center">
-          {error && (
-            <div style={{ color: '#900' }}>
-              {error}
-            </div>
-          )}
+          <Coins coinsDataApp={searchCoins} />
 
-          {isLoading && (
-            <Spinner />
-          )}
+          <div className="container text-center pb-5">
+            {error && (
+              <div style={{ color: '#900' }}>
+                {error}
+              </div>
+            )}
 
-          {!hasMore && (
-            <div>You reached the end!</div>
-          )}
+            {isLoading && (
+              <Spinner />
+            )}
+
+            {!hasMore && (
+              <div>You reached the end!</div>
+            )}
+          </div>
         </div>
       </div>
     );
