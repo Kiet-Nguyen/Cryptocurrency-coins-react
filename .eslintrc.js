@@ -3,12 +3,12 @@ module.exports = {
     "parser": "babel-eslint",
     "rules": {
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-        "jsx-a11y/label-has-for": [1, {
+        "jsx-a11y/label-has-for": {
             "required": {
                 "some": ["nesting", "id"]
             },
-            "allowChildren": true,
-        }]
+            "allowChildren": false,
+        }
     },
     "env": {
         "browser": true,
