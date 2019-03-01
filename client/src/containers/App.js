@@ -95,11 +95,11 @@ class App extends Component {
 
     this.setState({ isLoading: true }, async () => {
       try {
-        const results = await axios.get(`?start=${startValue}&limit=12`);
+        const results = await axios.get('/api/coins');
         const resultsArray = this.apiResultToArray(results);
+        console.log('resultsArray:', resultsArray);
         this.setState({
           startValue: startValue + 13,
-          hasMore: coins.length < 2093,
           isLoading: false,
           coins: [
             ...coins,
@@ -135,8 +135,8 @@ class App extends Component {
 
     sortCoinCards.sort((a, b) => {
       if (type === 'price') {
-        valueA = a.quotes.USD[type];
-        valueB = b.quotes.USD[type];
+        valueA = a.quote.USD[type];
+        valueB = b.quote.USD[type];
       } else {
         valueA = a[type];
         valueB = b[type];
@@ -185,7 +185,7 @@ class App extends Component {
       descending,
     } = this.state;
 
-    const sortValueArr = ['name', 'rank', 'price'];
+    const sortValueArr = ['name', 'cmc_rank', 'price'];
 
     return (
       <div className={classes.bgLightGray}>

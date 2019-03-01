@@ -46,7 +46,7 @@ const Coin = ({ coin }) => (
         </h2>
 
         <h3 className={`${globalClasses.heading3} mb-4`}>
-          {`Rank: ${coin.rank}`}
+          {`Rank: ${coin.cmc_rank}`}
         </h3>
 
         <ul className="list-unstyled">
@@ -54,13 +54,13 @@ const Coin = ({ coin }) => (
             <p className={`${classes.textHighlight} mb-0`}>Price: </p>
             <span className={classes.textBlue}>
               $
-              {formatPriceUSD(coin.quotes.USD.price)}
+              {formatPriceUSD(coin.quote.USD.price)}
             </span>
           </li>
           <li className="mb-2">
             <p className={`${classes.textHighlight} mb-0`}>Change (24h): </p>
-            <span style={(coin.quotes.USD.percent_change_24h > 0) ? { color: '#55b3e9' } : { color: '#d94040' }}>
-              {coin.quotes.USD.percent_change_24h}
+            <span style={(coin.quote.USD.percent_change_24h > 0) ? { color: '#55b3e9' } : { color: '#d94040' }}>
+              {coin.quote.USD.percent_change_24h}
               %
             </span>
           </li>
@@ -68,14 +68,14 @@ const Coin = ({ coin }) => (
             <p className={`${classes.textHighlight} mb-0`}>Volumn (24h): </p>
             <span>
               $
-              {formatPriceUSD(coin.quotes.USD.volume_24h)}
+              {formatPriceUSD(coin.quote.USD.volume_24h)}
             </span>
           </li>
           <li className="mb-2">
             <p className={`${classes.textHighlight} mb-0`}>Market cap: </p>
             <span>
               $
-              {formatPriceUSD(coin.quotes.USD.market_cap)}
+              {formatPriceUSD(coin.quote.USD.market_cap)}
             </span>
           </li>
         </ul>
@@ -89,15 +89,15 @@ const Coin = ({ coin }) => (
         <ul className="list-unstyled">
           <li className="mb-2">
             <p className={`${classes.textHighlight} mb-0`}>Change (1h): </p>
-            <span style={(coin.quotes.USD.percent_change_1h > 0) ? { color: '#55b3e9' } : { color: '#d94040' }}>
-              {coin.quotes.USD.percent_change_1h}
+            <span style={(coin.quote.USD.percent_change_1h > 0) ? { color: '#55b3e9' } : { color: '#d94040' }}>
+              {coin.quote.USD.percent_change_1h}
               %
             </span>
           </li>
           <li className="mb-2">
             <p className={`${classes.textHighlight} mb-0`}>Change (1h): </p>
-            <span style={(coin.quotes.USD.percent_change_7d > 0) ? { color: '#55b3e9' } : { color: '#d94040' }}>
-              {coin.quotes.USD.percent_change_7d}
+            <span style={(coin.quote.USD.percent_change_7d > 0) ? { color: '#55b3e9' } : { color: '#d94040' }}>
+              {coin.quote.USD.percent_change_7d}
               %
             </span>
           </li>

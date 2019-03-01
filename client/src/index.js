@@ -1,28 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
+// import axios from 'axios';
 
 import './index.css';
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 
-axios.defaults.baseURL = 'https://api.coinmarketcap.com/v2/ticker/';
+// axios.defaults.baseURL = 'https://api.coinmarketcap.com/v2/ticker/';
 
-axios.interceptors.request.use((request) => {
-  console.log(request);
-  return request;
-}, (error) => {
-  console.log(error);
-  return Promise.reject(error);
-});
+// axios.interceptors.request.use((request) => {
+//   console.log(request);
+//   return request;
+// }, (error) => {
+//   console.log(error);
+//   return Promise.reject(error);
+// });
 
-axios.interceptors.response.use((response) => {
-  console.log(response);
-  return response;
-}, (error) => {
-  console.log(error);
-  return Promise.reject(error);
-});
+// axios.interceptors.response.use((response) => {
+//   console.log(response);
+//   return response;
+// }, (error) => {
+//   console.log(error);
+//   return Promise.reject(error);
+// });
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

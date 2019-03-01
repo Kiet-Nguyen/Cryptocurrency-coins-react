@@ -1,0 +1,32 @@
+{
+  "name": "cryptocurrency-coins-react",
+  "version": "1.0.0",
+  "description": "Coin cards",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kiet-Nguyen/Cryptocurrency-coins-react.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kiet-Nguyen/Cryptocurrency-coins-react/issues"
+  },
+  "homepage": "https://github.com/Kiet-Nguyen/Cryptocurrency-coins-react#readme",
+  "dependencies": {
+    "concurrently": "^4.1.0",
+    "express": "^4.16.4",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
